@@ -22,8 +22,8 @@ prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-def generate_response(question,api_key,llm,tempreture,max_tokens):
-    llm = ChatGroq(model=llm,api_key=api_key,max_tokens=max_tokens)
+def generate_response(question,llm,tempreture,max_tokens):
+    llm = ChatGroq(model=llm,max_tokens=max_tokens)
     output = StrOutputParser()
     chain = prompt|llm|output
     answer = chain.stream({"question":question})
@@ -33,7 +33,6 @@ def generate_response(question,api_key,llm,tempreture,max_tokens):
 
 st.title("Q&A CHATBOT")
 st.sidebar.title("SETTINGS")
-api_key = st.sidebar.text_input("enter your groq api key",type="password")
 
 ## dropdown 
 model_dict = {
@@ -54,7 +53,7 @@ st.write("Ask any Question")
 user_input = st.text_input("you:")
 if user_input:
     with st.spinner():
-        response = generate_response(user_input,api_key,llm,tempreture,max_tokens)
+        response = generate_response(user_input,llm,tempreture,max_tokens)
         st.write(response)
 else:
     st.write("Please provide the Questuion")
