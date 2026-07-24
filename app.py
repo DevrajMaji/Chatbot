@@ -44,7 +44,7 @@ model_dict = {
 selected = st.sidebar.selectbox("select an model",list(model_dict.keys()))
 llm = model_dict[selected]
 tempreture = st.sidebar.slider("Tempreture",min_value=0.0,max_value=1.0,value=0.7)
-max_tokens =  st.sidebar.slider("Max Tokens",min_value=50,max_value=300,value=150)
+max_tokens =  st.sidebar.slider("Max Tokens",min_value=500,max_value=2000,value=800)
 
 #main interface
 
